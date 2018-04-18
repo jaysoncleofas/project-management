@@ -1,0 +1,28 @@
+.section {
+  padding: 1rem .5rem !important
+}
+
+header.card-header {
+  background: $primary;
+  .card-header-title{
+    color: white;
+    font-weight: normal;
+  }
+}
+nav.navbar{
+  transition: margin-left .3s;
+  margin-left: 250px;
+  &.is-active {
+    transition: margin-left .3s;
+    margin-left: 0;
+  }
+  @include mobile {
+    margin-left: 0;
+  }
+}
+
+body{
+  background-color: #fafafa;
+  height: 100vh;
+  font-family: Poppins
+}
