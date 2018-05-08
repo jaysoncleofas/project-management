@@ -10,6 +10,8 @@ class Social extends Model
     'skype', 'linkedin', 'twitter', 'facebook'
   ];
 
+  public $timestamps = false;
+
   public function client()
   {
     return $this->belongsTo('App\Client');

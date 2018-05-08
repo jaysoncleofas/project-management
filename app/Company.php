@@ -10,6 +10,8 @@ class Company extends Model
     'company_name', 'website', 'address'
   ];
 
+  public $timestamps = false;
+
   public function client()
   {
     return $this->belongsTo('App\Client');

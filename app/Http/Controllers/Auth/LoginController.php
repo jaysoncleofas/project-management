@@ -25,7 +25,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+     protected function redirectTo()
+      {
+        if (auth()->user()->hasRole('superadministrator|administrator')) {
+          return '/admin/dashboard';
+        } else {
+          return '/user/dashboard';
+        }
+      }
+
+
 
     /**
      * Create a new controller instance.
@@ -36,4 +45,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
 }

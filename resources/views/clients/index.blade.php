@@ -26,9 +26,11 @@
       <div class="column">
         <div class="card">
           <div class="card-content">
-            <a href="{{route('clients.create')}}" class="button is-primary is-outlined mb-4">Add New Client <i class="fa fa-plus ml-2"></i></a>
+            @if (Auth::user()->hasRole('superadministrator|administrator'))
+              <a href="{{route('admin.clients.create')}}" class="button is-primary is-outlined mb-4">Add New Client <i class="fa fa-plus ml-2"></i></a>
+            @endif
             <div style="overflow-x: scroll">
-              <table id="myTable" class="cell-border" style="width:100%">
+              <table id="clients-table" class="cell-border" style="width:100%">
                 <thead>
                   <tr>
                     <th>Id</th>
@@ -36,11 +38,11 @@
                     <th>Company Name</th>
                     <th>Email</th>
                     <th>Created at</th>
-                    <th>Action</th>
+                    {{-- <th>Action</th> --}}
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($clients as $client)
+                  {{-- @foreach ($clients as $client)
                     <tr>
                       <td>{{$client->id}}</td>
                       <td>{{$client->name}}</td>
@@ -53,7 +55,7 @@
                         <a class="button is-danger is-rounded tooltip is-small" data-tooltip="Delete"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
-                  @endforeach
+                  @endforeach --}}
                 </tbody>
               </table>
             </div>
@@ -67,8 +69,20 @@
 @section('script')
   <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript">
-  $(document).ready( function () {
-    $('#myTable').DataTable();
-  } );
+  $.fn.dataTable.ext.classes.sPageButton = 'button pagination-link';
+  $.fn.dataTable.ext.classes.sPageButtonActive = 'button is-current';
+  $('#clients-table').DataTable({
+       processing: true,
+       serverSide: true,
+       ajax: '{{ route('api.clients.index') }}',
+       columns: [
+           {data: 'id', name: 'clients.id'},
+           {data: 'name', name: 'clients.name'},
+           {data: 'company.company_name', name: 'company.company_name'},
+           {data: 'email', name: 'clients.email'},
+           {data: 'created_at', name: 'clients.created_at'},
+           // {data: 'updated_at', name: 'posts.updated_at'}
+       ]
+   });
   </script>
 @endsection

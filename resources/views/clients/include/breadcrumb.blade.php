@@ -6,15 +6,15 @@
     <!-- Right side -->
     <div class="level-right">
       <nav class="breadcrumb" aria-label="breadcrumbs">
-        @if (Request::is('clients/create'))
+        @if (Request::is('admin.clients.create'))
           <ul>
-            <li><a href="{{route('dashboard')}}">Home</a></li>
-            <li><a href="{{route('clients.index')}}">Clients</a></li>
+            <li><a href="{{route('admin.dashboard')}}">Home</a></li>
+            <li><a href="{{route('admin.clients.index')}}">Clients</a></li>
             <li class="is-active"><a href="#" aria-current="page">Create</a></li>
           </ul>
         @else
           <ul>
-            <li><a href="{{route('dashboard')}}">Home</a></li>
+            <li><a href="{{route('admin.dashboard')}}">Home</a></li>
             <li class="is-active"><a href="#" aria-current="page">Clients</a></li>
           </ul>
         @endif

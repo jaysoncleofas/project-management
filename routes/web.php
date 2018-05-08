@@ -17,5 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::resource('/clients', 'ClientController');
+Route::name('admin.')->group(function () {
+  Route::group(['prefix' => 'admin', 'middleware' => ['role:superadministrator|administrator'], 'name' => 'admin.'], function() {
+      Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+      Route::resource('/clients', 'ClientController');
+  });
+});
+
+Route::name('user.')->group(function () {
+  Route::group(['prefix' => 'user', 'middleware' => ['role:user']], function() {
+      Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+      Route::resource('/clients', 'ClientController', ['only' => ['index','show']]);
+  });
+});

@@ -10,7 +10,7 @@
           <header class="card-header">
             <p class="card-header-title is-uppercase">Add Client Info</p>
           </header>
-          <form action="{{route('clients.store')}}" method="post">
+          <form action="{{route('admin.clients.store')}}" method="post">
             @csrf
             <div class="card-content">
               <label>Company Details</label>
@@ -117,7 +117,7 @@
                       <button type="submit" class="button is-primary">Save</button>
                     </div>
                     <div class="control">
-                      <button class="button is-text">Cancel</button>
+                      <a href="{{route('admin.clients.index')}}" class="button is-text">Cancel</a>
                     </div>
                   </div>
                 </div>
